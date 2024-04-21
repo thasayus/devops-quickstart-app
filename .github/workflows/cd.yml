@@ -24,18 +24,18 @@ jobs:
         id: config
         run: |
           echo "site_version=$(cat ./site/version)" >> "$GITHUB_OUTPUT"
-          echo "api_version=$(cat ./site/version)" >> "$GITHUB_OUTPUT"
+          echo "api_version=$(cat ./api/version)" >> "$GITHUB_OUTPUT"
 
       - name: Build and push API
         uses: docker/build-push-action@v5
         with:
           context: ./api
           push: true
-          tags: babelcoder/intro-to-devops-api:${{steps.config.outputs.api_version}}
+          tags: thasayu/intro-to-devops-api:${{steps.config.outputs.api_version}}
 
       - name: Build and push Site
         uses: docker/build-push-action@v5
         with:
           context: ./site
           push: true
-          tags: babelcoder/intro-to-devops-ui:${{steps.config.outputs.site_version}}
+          tags: thasayu/intro-to-devops-ui:${{steps.config.outputs.site_version}}
